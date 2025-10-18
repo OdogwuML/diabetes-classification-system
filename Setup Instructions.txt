@@ -1,0 +1,7 @@
+Setup Instructions
+
+- Install Python.
+- Navigate to project folder.
+- Install Dependencies.
+- Start Jupyter notebook.
+- View Cells.

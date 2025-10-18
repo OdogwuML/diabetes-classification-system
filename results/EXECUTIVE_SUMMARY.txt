@@ -1,0 +1,72 @@
+================================================================================
+EXECUTIVE SUMMARY
+Development of an Intelligent System for Diabetes Classification
+Using Machine Learning: A Comparative Analysis
+================================================================================
+
+Student: UGOARU KINGSLEY NWACHUKWU (20201249402)
+Date: October 2025
+
+PROBLEM STATEMENT
+--------------------------------------------------------------------------------
+Diabetes is a growing health concern in Nigeria, with many cases going
+undiagnosed until serious complications arise. Early detection is critical
+for effective management, but traditional screening methods are time-consuming
+and require specialized medical expertise.
+
+OBJECTIVE
+--------------------------------------------------------------------------------
+To develop and compare three machine learning algorithms (Naïve Bayes, SVM,
+and Decision Tree) for automated diabetes classification, identifying the
+most effective approach for clinical application.
+
+METHODOLOGY
+--------------------------------------------------------------------------------
+• Dataset: 768 patient records from Pima Indians Diabetes Database
+• Features: 8 clinical measurements (glucose, BMI, age, etc.)
+• Preprocessing: Missing value imputation, feature scaling
+• Training: 80% training, 20% testing split
+• Optimization: Grid Search with 5-fold cross-validation
+• Evaluation: Accuracy, Precision, Recall, F1-Score
+
+KEY FINDINGS
+--------------------------------------------------------------------------------
+
+Model Performance Comparison:
+  Naive Bayes    : 70.13% accuracy, 0.5965 F1-Score
+  SVM            : 69.48% accuracy, 0.5253 F1-Score
+  Decision Tree  : 68.83% accuracy, 0.3684 F1-Score
+
+Best Performing Model: Naive Bayes
+  • Accuracy: 70.13%
+  • F1-Score: 0.5965
+  • Correctly identified 34 diabetic cases
+  • Missed 20 diabetic cases
+
+SIGNIFICANCE
+--------------------------------------------------------------------------------
+• Demonstrates feasibility of ML for diabetes screening
+• Provides objective comparison of three algorithms
+• Achieves clinically relevant accuracy levels
+• Can support healthcare workers in resource-limited settings
+• Enables faster, more accessible diabetes screening
+
+RECOMMENDATIONS
+--------------------------------------------------------------------------------
+1. Validate with local Nigerian patient data
+2. Conduct clinical trials in healthcare facilities
+3. Integrate with existing health information systems
+4. Train healthcare workers on system interpretation
+5. Establish continuous monitoring and model updates
+
+CONCLUSION
+--------------------------------------------------------------------------------
+This study successfully developed and compared three ML algorithms for
+diabetes classification. The Naive Bayes emerged as the best performer,
+achieving 70.13% accuracy. The system demonstrates
+potential for supporting early diabetes detection in Nigerian healthcare
+settings, pending further validation and clinical integration.
+
+================================================================================
+END OF EXECUTIVE SUMMARY
+================================================================================

@@ -1,0 +1,4 @@
+Model,Mean CV Accuracy,Std CV Accuracy,Training Time (sec),Best Parameters
+Naive Bayes,0.7589764094362256,0.007719479426741846,0.06200218200683594,
+SVM,0.7769292283086766,0.0,10.174767255783081,"{'C': 100, 'gamma': 0.001, 'kernel': 'rbf'}"
+Decision Tree,0.7557910169265626,0.0,1.9695429801940918,"{'criterion': 'entropy', 'max_depth': 3, 'min_samples_leaf': 1, 'min_samples_split': 20}"

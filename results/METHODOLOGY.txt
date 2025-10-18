@@ -1,0 +1,272 @@
+================================================================================
+DETAILED METHODOLOGY DOCUMENTATION
+Diabetes Classification Using Machine Learning
+================================================================================
+
+CHAPTER 3: METHODOLOGY (For Thesis)
+
+3.1 RESEARCH DESIGN
+================================================================================
+
+This study adopted a quantitative comparative research design using supervised
+machine learning techniques. The research followed a systematic approach:
+
+1. Data Collection and Exploration
+2. Data Preprocessing and Preparation
+3. Model Development and Training
+4. Model Evaluation and Comparison
+5. Results Analysis and Interpretation
+
+3.2 DATASET DESCRIPTION
+================================================================================
+
+Source: Pima Indians Diabetes Database (UCI Machine Learning Repository)
+Collection Method: Secondary data from medical records
+Population: Female patients of Pima Indian heritage
+Age Criterion: 21 years and above
+Sample Size: 768 patients
+Time Period: Collected between 1960s-1990s
+
+Feature Variables:
+  • Pregnancies              : Number of times pregnant            [Numerical (0-17)]
+  • Glucose                  : Plasma glucose concentration        [Numerical (0-199 mg/dL)]
+  • BloodPressure            : Diastolic blood pressure            [Numerical (0-122 mm Hg)]
+  • SkinThickness            : Triceps skin fold thickness         [Numerical (0-99 mm)]
+  • Insulin                  : 2-Hour serum insulin                [Numerical (0-846 mu U/ml)]
+  • BMI                      : Body mass index                     [Numerical (0-67.1)]
+  • DiabetesPedigreeFunction : Genetic predisposition score        [Numerical (0.078-2.42)]
+  • Age                      : Age in years                        [Numerical (21-81)]
+
+Target Variable:
+  • Outcome: Binary classification (0=Non-Diabetic, 1=Diabetic)
+
+3.3 DATA PREPROCESSING TECHNIQUES
+================================================================================
+
+3.3.1 Missing Value Treatment
+--------------------------------------------------------------------------------
+Problem Identified:
+  Several features contained zero values that are medically impossible,
+  indicating missing or erroneous data entries.
+
+Solution Implemented:
+  Step 1: Identify affected features
+          (Glucose, BloodPressure, SkinThickness, Insulin, BMI)
+  Step 2: Replace zero values with NaN (Not a Number)
+  Step 3: Calculate median value for each feature
+  Step 4: Impute missing values using median
+
+Justification for Median Imputation:
+  • Robust to outliers (unlike mean)
+  • Preserves data distribution
+  • Widely accepted in medical data preprocessing
+  • Does not introduce extreme values
+
+3.3.2 Data Splitting
+--------------------------------------------------------------------------------
+Method: Stratified train-test split
+Ratio: 80% training, 20% testing
+Random State: 42 (for reproducibility)
+
+Stratification Purpose:
+  Ensures both training and testing sets maintain the same proportion
+  of diabetic to non-diabetic cases as the original dataset.
+
+Result:
+  • Training Set: 614 samples
+  • Testing Set: 154 samples
+  • Class distribution preserved in both sets
+
+3.3.3 Feature Scaling
+--------------------------------------------------------------------------------
+Method: StandardScaler (Z-score normalization)
+
+Mathematical Formula:
+  z = (x - μ) / σ
+  Where:
+    z = standardized value
+    x = original value
+    μ = mean of feature
+    σ = standard deviation of feature
+
+Purpose:
+  • Transforms all features to have mean = 0 and std = 1
+  • Prevents features with larger ranges from dominating the model
+  • Improves convergence speed during training
+  • Required for distance-based algorithms (SVM, KNN)
+
+Implementation:
+  • Scaler fitted on training data only
+  • Same transformation applied to test data
+  • Scaler saved for future use on new data
+
+3.4 MODEL DEVELOPMENT AND TRAINING
+================================================================================
+
+3.4.1 Naïve Bayes Classifier
+--------------------------------------------------------------------------------
+
+Theoretical Foundation:
+  Based on Bayes' Theorem with the 'naive' assumption of feature independence.
+
+Mathematical Model:
+  P(C|X) = [P(X|C) × P(C)] / P(X)
+  Where:
+    C = Class (Diabetic or Non-Diabetic)
+    X = Feature vector
+    P(C|X) = Posterior probability
+    P(X|C) = Likelihood
+    P(C) = Prior probability
+    P(X) = Evidence
+
+Implementation Details:
+  Algorithm: GaussianNB (assumes Gaussian distribution)
+  Library: scikit-learn
+  Hyperparameters: Default (no tuning required)
+  Validation: 5-fold cross-validation
+
+Advantages:
+  • Fast training and prediction
+  • Works well with small datasets
+  • Probabilistic interpretation of results
+  • Low memory requirements
+
+3.4.2 Support Vector Machine (SVM)
+--------------------------------------------------------------------------------
+
+Theoretical Foundation:
+  Finds the optimal hyperplane that maximizes the margin between classes.
+
+Mathematical Model:
+  Objective: Minimize ||w||² subject to y_i(w·x_i + b) ≥ 1
+  Where:
+    w = weight vector (normal to hyperplane)
+    b = bias term
+    x_i = feature vector
+    y_i = class label (-1 or +1)
+
+Hyperparameter Optimization:
+  Method: Grid Search with Cross-Validation
+  Search Space:
+    • C (Regularization): [0.1, 1, 10, 100]
+    • kernel: ['linear', 'rbf', 'poly']
+    • gamma: ['scale', 'auto', 0.001, 0.01]
+  Total Combinations: 48
+  Validation: 5-fold cross-validation
+  Scoring Metric: Accuracy
+
+Hyperparameter Descriptions:
+  • C: Controls trade-off between margin size and training error
+  • kernel: Defines the decision boundary shape
+  • gamma: Influences the reach of individual training samples
+
+3.4.3 Decision Tree Classifier
+--------------------------------------------------------------------------------
+
+Theoretical Foundation:
+  Recursive binary splitting based on feature values to create a tree
+  structure that separates classes.
+
+Splitting Criteria:
+  Gini Impurity: Gini = 1 - Σ(p_i)²
+  Entropy: H = -Σ(p_i × log₂(p_i))
+  Where p_i is the proportion of class i at a node
+
+Hyperparameter Optimization:
+  Method: Grid Search with Cross-Validation
+  Search Space:
+    • max_depth: [3, 5, 7, 10, None]
+    • min_samples_split: [2, 5, 10, 20]
+    • min_samples_leaf: [1, 2, 4]
+    • criterion: ['gini', 'entropy']
+  Total Combinations: 160
+  Validation: 5-fold cross-validation
+
+Hyperparameter Descriptions:
+  • max_depth: Maximum depth of the tree (controls overfitting)
+  • min_samples_split: Minimum samples required to split a node
+  • min_samples_leaf: Minimum samples required in each leaf
+  • criterion: Function to measure split quality
+
+3.5 MODEL EVALUATION METHODOLOGY
+================================================================================
+
+3.5.1 Evaluation Metrics
+--------------------------------------------------------------------------------
+
+Accuracy:
+  Formula: (TP + TN) / (TP + TN + FP + FN)
+  Interpretation: Overall proportion of correct predictions
+
+Precision:
+  Formula: TP / (TP + FP)
+  Interpretation: Of all positive predictions, how many are correct?
+  Clinical Meaning: Reliability of diabetic diagnosis
+
+Recall (Sensitivity):
+  Formula: TP / (TP + FN)
+  Interpretation: Of all actual positives, how many are detected?
+  Clinical Meaning: Ability to identify diabetic patients
+
+F1-Score:
+  Formula: 2 × (Precision × Recall) / (Precision + Recall)
+  Interpretation: Harmonic mean of precision and recall
+  Clinical Meaning: Balance between false alarms and missed cases
+
+Confusion Matrix Components:
+  • True Positive (TP): Correctly identified diabetic cases
+  • True Negative (TN): Correctly identified non-diabetic cases
+  • False Positive (FP): Non-diabetic incorrectly labeled diabetic
+  • False Negative (FN): Diabetic cases missed by the model
+
+3.5.2 Cross-Validation Strategy
+--------------------------------------------------------------------------------
+Method: K-Fold Cross-Validation (k=5)
+
+Process:
+  1. Split training data into 5 equal folds
+  2. Train on 4 folds, validate on 1 fold
+  3. Rotate and repeat 5 times
+  4. Average the 5 validation scores
+
+Purpose:
+  • Assess model stability and consistency
+  • Reduce variance in performance estimates
+  • Detect overfitting
+
+3.5.3 Model Comparison Framework
+--------------------------------------------------------------------------------
+Primary Criterion: F1-Score
+  Rationale: Balances precision and recall, critical in medical diagnosis
+
+Secondary Criteria:
+  • Accuracy: Overall performance
+  • Precision: Cost of false positives
+  • Recall: Cost of false negatives
+  • Training Time: Computational efficiency
+  • Model Interpretability: Clinical acceptability
+
+3.6 TOOLS AND IMPLEMENTATION ENVIRONMENT
+================================================================================
+
+Programming Language:
+  • Python 3.10
+
+Core Libraries:
+  • scikit-learn 1.3.2: Machine learning algorithms
+  • pandas 2.0.3: Data manipulation
+  • NumPy 1.24.3: Numerical computations
+  • Matplotlib 3.7.2: Visualization
+  • Seaborn 0.12.2: Statistical visualization
+
+Development Environment:
+  • Jupyter Notebook: Interactive development
+  • Operating System: Cross-platform compatible
+
+Hardware Requirements:
+  • Minimum: 4GB RAM, dual-core processor
+  • Recommended: 8GB RAM, quad-core processor
+
+================================================================================
+END OF METHODOLOGY DOCUMENTATION
+================================================================================

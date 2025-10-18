@@ -1,0 +1,37 @@
+# Core Data Science Libraries
+numpy
+pandas
+
+# Machine Learning
+scikit-learn
+
+# Data Visualization
+matplotlib
+seaborn
+
+# Model Persistence
+joblib
+
+# Jupyter Notebook (Optional - for interactive development)
+jupyter
+notebook
+ipykernel
+
+# Progress Bars (Optional - for better UX during training)
+tqdm
+
+# Data Validation (Optional - for robust data checks)
+scipy
+
+# Utilities
+python-dateutil
+pytz
+
+# Development Tools (Optional - for code quality)
+black
+flake8
+pylint
+
+# Testing (Optional - for unit tests)
+pytest
+pytest-cov

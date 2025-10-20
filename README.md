@@ -143,8 +143,8 @@ diabetes-classification/
 
 ```bash
 # Clone repository
-git clone https://github.com/YOUR-USERNAME/diabetes-classification-ml.git
-cd diabetes-classification-ml
+git clone https://github.com/YOUR-USERNAME/diabetes-classification-system.git
+cd diabetes-classification-system
 
 # Install dependencies
 pip install -r requirements.txt

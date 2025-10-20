@@ -40,10 +40,6 @@ Diabetes is a critical global health issue affecting millions of people worldwid
 ### 🔬 Research Question
 *"Which machine learning algorithm performs best for diabetes classification: Naïve Bayes, Support Vector Machine (SVM), or Decision Tree?"*
 
-### 🎓 Academic Context
-This project was completed as part of a B.Tech degree requirement in Information Technology at the Federal University of Technology, Owerri (FUTO), Nigeria.
-
----
 
 ## 📊 Key Results
 

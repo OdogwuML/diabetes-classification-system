@@ -143,7 +143,7 @@ diabetes-classification/
 
 ```bash
 # Clone repository
-git clone https://github.com/YOUR-USERNAME/diabetes-classification-system.git
+git clone https://github.com/OdogwuML/diabetes-classification-system.git
 cd diabetes-classification-system
 
 # Install dependencies
